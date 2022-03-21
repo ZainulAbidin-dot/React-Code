@@ -112,7 +112,8 @@ function AdminEditMenu() {
               {Object.entries(images).map((img, index) => (
                 <li
                   className={styles.image}
-                  key={index} role="button"
+                  key={index}
+                  role="button"
                   onClick={() => updateIcon(img[1].img)}
                 >
                   <img src={img[1].img} alt={img[0]} />
@@ -142,8 +143,8 @@ function AdminEditMenu() {
               <span
                 className="item-icon"
                 role="button"
-                aria-label="click here to changeicon"
-                title="click here to changeicon"
+                aria-label="click here to change icon"
+                title="click here to change icon"
                 onClick={() => handleIconClick(item.id)}
               >
                 <img src={item.icon} alt={item.title} />
@@ -236,8 +237,8 @@ function AdminEditMenu() {
                   <span
                     className="item-icon"
                     role="button"
-                    aria-label="click here to changeicon"
-                    title="click here to changeicon"
+                    aria-label="click here to change icon"
+                    title="click here to change icon"
                     onClick={() => handleIconClick(item.id)}
                   >
                     <img src={item.icon} alt={item.title} />
