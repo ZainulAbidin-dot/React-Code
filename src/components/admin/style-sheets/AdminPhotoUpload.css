@@ -1,0 +1,11 @@
+.PhotoUpload {
+  margin: 0;
+  background-color: black;
+  margin-bottom: 5%;
+}
+
+.restCover {
+  width: 100%;
+  max-height: 400px;
+  background-size: cover;
+}

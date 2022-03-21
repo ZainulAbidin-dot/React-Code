@@ -1,0 +1,12 @@
+FONT:
+contatti -> Sinews Sans Pro Light
+
+wifi -> Sinews Sans Pro Medium
+linea/pwd -> Sinews Sans Pro Light
+
+menu -> Sinews Sans Pro Medium
+
+sezioni -> Sinews Sans Pro Regular
+
+
+Burlingame W04 Cn Light Italic: "Save" "Close"

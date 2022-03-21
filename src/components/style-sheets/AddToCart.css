@@ -1,0 +1,13 @@
+#orderIcon {
+  width: 15%;
+}
+
+.orderBtn {
+  background-color: #4cac33;
+  border-radius: 80px;
+}
+
+.productPhoto {
+  width: 5%;
+  max-height: 20px;
+}

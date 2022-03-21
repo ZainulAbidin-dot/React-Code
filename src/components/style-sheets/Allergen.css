@@ -1,0 +1,24 @@
+.color {
+  background-color: #ffee00;
+}
+
+.btnAllergen {
+  background-color: #ffee00;
+}
+
+.allergenIcon {
+  /* width: 200%; */
+  min-width: 35px;
+  max-height: 50px;
+}
+
+.allergenContainer {
+  display: block;
+}
+
+.allergenCol {
+  width: 45%;
+  margin: 2%;
+  color: #9dff00;
+  /* background-color: #0c6b0f; */
+}

@@ -1,0 +1,22 @@
+.edit {
+  border-radius: 20px;
+  width: 35%;
+  max-width: 200px;
+}
+
+.editImg {
+  max-width: 40px;
+  min-width: 35px;
+}
+
+.backColor {
+  background-color: #f6fbfb;
+}
+
+.modalHead {
+  background-color: rgb(235, 231, 231);
+}
+
+.modalBody {
+  border-radius: 20px;
+}

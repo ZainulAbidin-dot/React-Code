@@ -1,0 +1,69 @@
+.restaurantCard {
+  border-radius: 20px;
+}
+
+.color {
+  background-color: #507839;
+}
+
+.restaurantLogo {
+  background-size: cover;
+}
+
+.infoIcon {
+  width: 20%;
+  max-width: 50px;
+  margin: 2%;
+}
+
+.restIcon {
+  width: 20%;
+  max-width: 30px;
+  margin: 2%;
+}
+
+.wifi {
+  background-color: #507839;
+  display: inline-flex;
+  color: white;
+
+  padding-left: 20%;
+  padding-right: 20%;
+
+  text-align: center;
+  justify-content: center;
+}
+
+.wifiLine {
+  border-bottom: 2px #507839 solid;
+  margin-bottom: -5%;
+}
+
+.wifiBadge {
+  background-color: #507839;
+}
+
+.wifi > p {
+  padding: 2%;
+  margin: 0;
+}
+
+.wifiDrop {
+  margin: 0%;
+  padding: 0%;
+}
+
+.wifiIcon {
+  float: left;
+  object-fit: contain;
+  margin: 2%;
+}
+
+.wifiInfo {
+  display: inline-block;
+  flex-direction: column;
+}
+
+.wifiCredentials {
+  margin: 0;
+}

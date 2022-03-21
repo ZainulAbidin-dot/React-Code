@@ -1,0 +1,57 @@
+.AEMContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #ebe7e7;
+  padding: 1rem 2rem;
+}
+
+.btnContainer {
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 2rem 0;
+}
+
+.btnContainer > * {
+  display: flex;
+  gap: 1rem;
+  border-radius: 2rem;
+  align-items: center;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu li {
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 1rem 0;
+  list-style: none;
+  border: 1px solid skyblue;
+  padding: 1rem 3rem;
+  border-radius: 2rem;
+}
+
+.item-title {
+  flex-grow: 1;
+}
+
+.addSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+button {
+  margin: 0 0.25rem;
+  border: none;
+  background-color: transparent;
+}
