@@ -1,32 +1,42 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style-sheets/AdminEditWifi.css";
-import "./style-sheets/AdminEditMenu.css";
+import "./style-sheets/AdminEditMenu.scss";
+
+import styles from './style-sheets/edit-menu-popup.module.css';
 
 import {
-  FaAccusoft,
-  FaCamera,
-  FaDrum,
   FaPlus,
   FaSort,
   FaSortDown,
   FaSortUp,
   FaTrash,
-  FaWineGlass,
+  FaTimes
 } from "react-icons/fa";
-import { Button, Modal, Alert } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
+
+function importAll(r) {
+  let images = {};
+  r.keys().map((item) => { images[item.replace('./', '')] = r(item); });
+  images = Object.entries(images).map(([key, value], index) => [key, { img: value, id: index }])
+  return Object.fromEntries(images);
+}
+
+const images = { ...importAll(require.context(`/public/icons/food-icons/food-icons/food`, false, /\.(png|jpe?g|svg)$/)), ...importAll(require.context(`/public/icons/food-icons/food-icons/beverage`, false, /\.(png|jpe?g|svg)$/)) };
 
 function AdminEditMenu() {
   const [show, setShow] = useState(false);
+  const [showPopup, setShowPopup] = useState(false)
+  const [selectedItem, setSelectdItem] = useState(null);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const [menuItems, setMenuItems] = useState([
-    { id: 1, title: "SUSHI", icon: <FaAccusoft /> },
-    { id: 2, title: "HAMBURGER", icon: <FaDrum /> },
-    { id: 3, title: "SECTION", icon: <FaCamera /> },
-    { id: 4, title: "WINE LIST", icon: <FaWineGlass /> },
+    { id: 1, title: "SUSHI", icon: images['sushi-1.svg'].img },
+    { id: 2, title: "HAMBURGER", icon: images['french-fries.svg'].img },
+    { id: 3, title: "SECTION", icon: images['french-fries.svg'].img },
+    { id: 4, title: "WINE LIST", icon: images['french-fries.svg'].img },
   ]);
   const [sort, setSort] = useState(false);
   const [del, setDel] = useState(false);
@@ -51,6 +61,23 @@ function AdminEditMenu() {
     if (confirmDelete) setMenuItems(menuItems.filter((item) => item.id !== id));
   };
 
+  const handleIconClick = (id) => {
+    setShowPopup(prev => !prev);
+    setSelectdItem(id);
+  }
+
+  const updateIcon = (imgLink) => {
+    const confirmUpdate = window.confirm('Are you sure..?');
+    if (!confirmUpdate) return
+    setMenuItems(menuItems.map(item => item.id === selectedItem ? { ...item, icon: imgLink } : item));
+    closePopup()
+  }
+
+  const closePopup = () => {
+    setShowPopup(prev => !prev);
+    setSelectdItem(null);
+  }
+
   return (
     <>
       <Button variant="bg-transparent col-6 mx-auto" onClick={handleShow}>
@@ -70,17 +97,39 @@ function AdminEditMenu() {
         <Button>Save</Button>
       </div>
 
+
+      {showPopup &&
+        <section className={styles.popupContainer}>
+          <article className={styles.popup}>
+            <FaTimes
+              className={styles.closeBtn}
+              role="button"
+              aria-label="close popup"
+              title="close popup"
+              onClick={closePopup}
+            />
+            <ul className={styles.images}>
+              {Object.entries(images).map((img, index) => (
+                <li
+                  className={styles.image}
+                  key={index} role="button"
+                  onClick={() => updateIcon(img[1].img)}
+                >
+                  <img src={img[1].img} alt={img[0]} />
+                </li>
+              ))}
+            </ul>
+          </article>
+        </section>
+      }
+
       <div className="btnContainer">
         <Button onClick={() => setSort((prev) => !prev)}>
-          <span>
-            <FaSort />
-          </span>
+          <FaSort />
           <span>Sort Sections</span>
         </Button>
         <Button onClick={() => setDel((prev) => !prev)}>
-          <span>
-            <FaTrash />
-          </span>
+          <FaTrash />
           <span>Delete Sections</span>
         </Button>
       </div>
@@ -88,27 +137,44 @@ function AdminEditMenu() {
       <div className="contentContainer">
         <h2>MENU</h2>
         <ul className="menu">
-          {menuItems.map((item) => (
-            <li>
-              <span className="item-icon">{item.icon}</span>
+          {menuItems.map((item, index) => (
+            <li key={index}>
+              <span
+                className="item-icon"
+                role="button"
+                aria-label="click here to changeicon"
+                title="click here to changeicon"
+                onClick={() => handleIconClick(item.id)}
+              >
+                <img src={item.icon} alt={item.title} />
+              </span>
               <span className="item-title">{item.title}</span>
               <span className="item-sort">
                 {sort && (
                   <>
-                    <button onClick={() => moveUp(item.id)}>
-                      <FaSortUp />
-                    </button>
-                    <button onClick={() => moveDown(item.id)}>
-                      <FaSortDown />
-                    </button>
+                    <FaSortUp
+                      role="button"
+                      aria-label="Swap position with item above"
+                      title="Swap position with item above"
+                      onClick={() => moveUp(item.id)}
+                    />
+                    <FaSortDown
+                      role="button"
+                      aria-label="Swap position with item below"
+                      title="Swap position with item below"
+                      onClick={() => moveDown(item.id)}
+                    />
                   </>
                 )}
               </span>
               <span className="item-sort">
                 {del && (
-                  <button onClick={() => deleteItem(item.id)}>
-                    <FaTrash />
-                  </button>
+                  <FaTrash
+                    role="button"
+                    aria-label="Delete this item"
+                    title="Delete this item"
+                    onClick={() => deleteItem(item.id)}
+                  />
                 )}
               </span>
             </li>
@@ -165,27 +231,44 @@ function AdminEditMenu() {
           <div className="contentContainer">
             <h2>MENU</h2>
             <ul className="menu">
-              {menuItems.map((item) => (
-                <li>
-                  <span className="item-icon">{item.icon}</span>
+              {menuItems.map((item, index) => (
+                <li key={index}>
+                  <span
+                    className="item-icon"
+                    role="button"
+                    aria-label="click here to changeicon"
+                    title="click here to changeicon"
+                    onClick={() => handleIconClick(item.id)}
+                  >
+                    <img src={item.icon} alt={item.title} />
+                  </span>
                   <span className="item-title">{item.title}</span>
                   <span className="item-sort">
                     {sort && (
                       <>
-                        <button onClick={() => moveUp(item.id)}>
-                          <FaSortUp />
-                        </button>
-                        <button onClick={() => moveDown(item.id)}>
-                          <FaSortDown />
-                        </button>
+                        <FaSortUp
+                          role="button"
+                          aria-label="Swap position with item above"
+                          title="Swap position with item above"
+                          onClick={() => moveUp(item.id)}
+                        />
+                        <FaSortDown
+                          role="button"
+                          aria-label="Swap position with item below"
+                          title="Swap position with item below"
+                          onClick={() => moveDown(item.id)}
+                        />
                       </>
                     )}
                   </span>
                   <span className="item-sort">
                     {del && (
-                      <button onClick={() => deleteItem(item.id)}>
-                        <FaTrash />
-                      </button>
+                      <FaTrash
+                        role="button"
+                        aria-label="Delete this item"
+                        title="Delete this item"
+                        onClick={() => deleteItem(item.id)}
+                      />
                     )}
                   </span>
                 </li>

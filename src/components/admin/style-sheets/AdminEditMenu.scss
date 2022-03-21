@@ -28,19 +28,33 @@
 }
 
 .menu li {
-  gap: 1rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin: 1rem 0;
+  gap: 1rem;
+  margin-bottom: 1rem;
   list-style: none;
   border: 1px solid skyblue;
-  padding: 1rem 3rem;
-  border-radius: 2rem;
+  padding: 1rem 2rem;
+  border-radius: 0.25rem;
+  -webkit-border-radius: 0.25rem;
+  -moz-border-radius: 0.25rem;
+  -ms-border-radius: 0.25rem;
+  -o-border-radius: 0.25rem;
 }
 
 .item-title {
   flex-grow: 1;
+}
+
+.item-icon{
+  width: 2.5rem;
+  cursor: pointer;
+  img{
+    display: block;
+    max-width: 100%;
+    aspect-ratio: 1;
+  }
 }
 
 .addSection {
