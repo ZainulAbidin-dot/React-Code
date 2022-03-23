@@ -91,13 +91,6 @@ function AdminEditMenu() {
         </div>
       </Button>
 
-      <div className="AEMContainer">
-        <Button>Close</Button>
-        <h3>EDIT MENU SECTION</h3>
-        <Button>Save</Button>
-      </div>
-
-
       {showPopup &&
         <section className={styles.popupContainer}>
           <article className={styles.popup}>
@@ -116,77 +109,13 @@ function AdminEditMenu() {
                   role="button"
                   onClick={() => updateIcon(img[1].img)}
                 >
-                  <img src={img[1].img} alt={img[0]} />
+                  <img src={img[1].img} alt={img[0]} title={img[0]} />
                 </li>
               ))}
             </ul>
           </article>
         </section>
       }
-
-      <div className="btnContainer">
-        <Button onClick={() => setSort((prev) => !prev)}>
-          <FaSort />
-          <span>Sort Sections</span>
-        </Button>
-        <Button onClick={() => setDel((prev) => !prev)}>
-          <FaTrash />
-          <span>Delete Sections</span>
-        </Button>
-      </div>
-
-      <div className="contentContainer">
-        <h2>MENU</h2>
-        <ul className="menu">
-          {menuItems.map((item, index) => (
-            <li key={index}>
-              <span
-                className="item-icon"
-                role="button"
-                aria-label="click here to change icon"
-                title="click here to change icon"
-                onClick={() => handleIconClick(item.id)}
-              >
-                <img src={item.icon} alt={item.title} />
-              </span>
-              <span className="item-title">{item.title}</span>
-              <span className="item-sort">
-                {sort && (
-                  <>
-                    <FaSortUp
-                      role="button"
-                      aria-label="Swap position with item above"
-                      title="Swap position with item above"
-                      onClick={() => moveUp(item.id)}
-                    />
-                    <FaSortDown
-                      role="button"
-                      aria-label="Swap position with item below"
-                      title="Swap position with item below"
-                      onClick={() => moveDown(item.id)}
-                    />
-                  </>
-                )}
-              </span>
-              <span className="item-sort">
-                {del && (
-                  <FaTrash
-                    role="button"
-                    aria-label="Delete this item"
-                    title="Delete this item"
-                    onClick={() => deleteItem(item.id)}
-                  />
-                )}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="addSection">
-        <Button>
-          <FaPlus /> Add New Section
-        </Button>
-      </div>
 
       <Modal
         show={show}
